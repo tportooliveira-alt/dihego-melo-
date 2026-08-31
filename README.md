@@ -114,3 +114,23 @@ python3 -m http.server 8000
     ├── deploy/       # systemd, nginx, deploy.sh
     └── tests/
 ```
+
+## Onde colocar as imagens
+
+O site liga essas fotos sozinho assim que os arquivos existirem. Sem eles, cada
+seção usa o degradê e continua funcionando normalmente — nada quebra.
+
+| Arquivo | Onde aparece |
+| --- | --- |
+| `img/hero.jpg` | Fundo do topo da página inicial (e capa do vídeo) |
+| `img/hero.mp4` | Vídeo de entrada do topo da página inicial |
+| `img/vender.jpg` | Topo da página "Venda seu veículo" |
+| `img/consorcio.jpg` | Topo da página de consórcios |
+| `img/contato.jpg` | Topo da página de contato |
+
+Guarde as imagens em no máximo ~1600px de largura e salve como JPG de qualidade
+80 — acima disso o site fica lento no celular sem ganho visível.
+
+> **Foto de anúncio é diferente.** Use imagem gerada por IA no topo e nas artes de
+> divulgação, mas a foto de cada veículo anunciado precisa ser do veículo real.
+> Foto genérica num anúncio engana o comprador e cria problema para a loja.

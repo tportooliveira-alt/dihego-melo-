@@ -233,6 +233,34 @@ h1, h2, h3, h4 {
 
 .hero > .container { position: relative; z-index: 2; }
 
+/* Fotos de fundo das páginas internas. Como são background-image, o arquivo
+   ausente simplesmente não aparece — nada quebra e nada fica com ícone de erro.
+   Basta salvar o arquivo com o nome indicado para a seção ganhar a foto. */
+.hero-vender::before,
+.hero-consorcio::before,
+.hero-contato::before {
+  background-size: cover;
+  background-position: center;
+}
+
+.hero-vender::before {
+  background-image:
+    linear-gradient(180deg, rgba(10, 21, 38, 0.74) 0%, rgba(10, 21, 38, 0.9) 62%, var(--bg) 100%),
+    url("../img/vender.jpg");
+}
+
+.hero-consorcio::before {
+  background-image:
+    linear-gradient(180deg, rgba(10, 21, 38, 0.74) 0%, rgba(10, 21, 38, 0.9) 62%, var(--bg) 100%),
+    url("../img/consorcio.jpg");
+}
+
+.hero-contato::before {
+  background-image:
+    linear-gradient(180deg, rgba(10, 21, 38, 0.76) 0%, rgba(10, 21, 38, 0.9) 62%, var(--bg) 100%),
+    url("../img/contato.jpg");
+}
+
 /* Respeita quem prefere menos animação: o vídeo não é exibido. */
 @media (prefers-reduced-motion: reduce) {
   .hero-video { display: none; }
