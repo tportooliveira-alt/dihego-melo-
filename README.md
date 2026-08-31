@@ -122,11 +122,13 @@ seção usa o degradê e continua funcionando normalmente — nada quebra.
 
 | Arquivo | Onde aparece |
 | --- | --- |
-| `img/hero.jpg` | Fundo do topo da página inicial (e capa do vídeo) |
-| `img/hero.mp4` | Vídeo de entrada do topo da página inicial |
-| `img/vender.jpg` | Topo da página "Venda seu veículo" |
-| `img/consorcio.jpg` | Topo da página de consórcios |
-| `img/contato.jpg` | Topo da página de contato |
+| `img/hero.jpg` + `img/hero.mp4` | Topo da página inicial — foto de capa e vídeo de entrada |
+| `img/vender.jpg` + `img/vender.mp4` | Topo da "Venda seu veículo" |
+| `img/consorcio.jpg` + `img/consorcio.mp4` | Topo dos consórcios |
+| `img/contato.jpg` | Topo do contato (só foto) |
+
+O `.jpg` de cada par é a capa que aparece enquanto o vídeo carrega e para quem
+prefere menos animação. Pode usar só o `.jpg`: o vídeo é opcional.
 
 Guarde as imagens em no máximo ~1600px de largura e salve como JPG de qualidade
 80 — acima disso o site fica lento no celular sem ganho visível.
