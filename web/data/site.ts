@@ -10,7 +10,7 @@ export const site = {
   telefone: "(77) 98846-8505",
   // Só dígitos, com DDI. Trocar pelo número real da loja.
   whatsapp: "5577988468505",
-  email: "contato@dm81.com.br",
+  email: "pointermelo@gmail.com",
   horario: "Seg a Sex 8h–18h · Sáb 8h–13h",
   parceiro: "Perim Consórcios",
   ano: 2026,

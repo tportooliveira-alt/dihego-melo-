@@ -470,6 +470,6 @@ const LOJA = {
   telefone: "(77) 98846-8505",
   // Somente números, com DDI 55 — usado nos links de WhatsApp.
   whatsapp: "5577988468505",
-  email: "contato@dm81.com.br",
+  email: "pointermelo@gmail.com",
   horario: "Seg a Sex: 8h às 18h | Sáb: 8h às 13h",
 };
