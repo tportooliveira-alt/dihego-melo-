@@ -77,13 +77,28 @@ a {
 }
 
 .logo .logo-icone {
-  width: 38px;
-  height: 38px;
+  width: 40px;
+  height: 40px;
   flex: 0 0 auto;
 }
 
-.logo span {
+.logo-texto {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.05;
+}
+
+.logo-texto .logo-81 {
   color: var(--acento);
+}
+
+.logo-texto small {
+  font-size: 0.56rem;
+  font-weight: 700;
+  letter-spacing: 1.6px;
+  text-transform: uppercase;
+  color: #ffb38a;
+  margin-top: 2px;
 }
 
 .menu {
@@ -830,6 +845,103 @@ a {
 
 .contato-info .btn-whats {
   margin-top: 1.5rem;
+}
+
+/* ===== Consórcio ===== */
+
+.cta-consorcio {
+  background:
+    radial-gradient(700px 300px at 90% 10%, rgba(255, 255, 255, 0.14), transparent 60%),
+    linear-gradient(135deg, var(--acento) 0%, #c2410c 100%);
+  color: #fff;
+  border-radius: var(--raio);
+  padding: 2.6rem 2rem;
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.cta-consorcio h2 {
+  font-size: clamp(1.35rem, 2.8vw, 1.9rem);
+  line-height: 1.25;
+}
+
+.cta-consorcio p {
+  opacity: 0.95;
+  margin-top: 0.6rem;
+}
+
+.cta-consorcio .btn-branco {
+  display: inline-block;
+  background: #fff;
+  color: var(--acento-escuro);
+  font-weight: 800;
+  font-size: 1rem;
+  padding: 0.85rem 1.8rem;
+  border-radius: 999px;
+  justify-self: center;
+  transition: transform 0.15s, box-shadow 0.2s;
+  white-space: nowrap;
+}
+
+.cta-consorcio .btn-branco:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
+}
+
+.consorcio-grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+.consorcio-texto .bloco {
+  margin-top: 0;
+}
+
+.consorcio-texto .bloco + .bloco {
+  margin-top: 1.5rem;
+}
+
+.consorcio-texto p + p {
+  margin-top: 0.7rem;
+}
+
+.promo-img {
+  border-radius: var(--raio);
+  overflow: hidden;
+  box-shadow: var(--sombra-hover);
+  border: 1px solid var(--borda);
+}
+
+.promo-img img {
+  display: block;
+  width: 100%;
+}
+
+.selo-parceria {
+  display: inline-block;
+  background: #fff4ee;
+  border: 1px solid #ffd6c2;
+  color: var(--acento-escuro);
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  margin-bottom: 0.8rem;
+}
+
+@media (max-width: 860px) {
+  .cta-consorcio,
+  .consorcio-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cta-consorcio {
+    text-align: center;
+  }
 }
 
 /* ===== Rodapé ===== */

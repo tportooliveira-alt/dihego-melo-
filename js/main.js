@@ -5,6 +5,9 @@ const TIPO_LABEL = {
   moto: "Moto",
   caminhao: "Caminhão",
   utilitario: "Utilitário",
+  onibus: "Ônibus",
+  carreta: "Carreta",
+  trator: "Trator",
 };
 
 function formatarPreco(valor) {
@@ -17,6 +20,13 @@ function formatarPreco(valor) {
 
 function formatarKm(km) {
   return km.toLocaleString("pt-BR") + " km";
+}
+
+// Rodagem do veículo: km, horas de uso (tratores/máquinas) ou nada (carretas).
+function rodagem(v) {
+  if (v.km != null) return "🛣️ " + formatarKm(v.km);
+  if (v.horas != null) return "⏱️ " + v.horas.toLocaleString("pt-BR") + " horas";
+  return "";
 }
 
 // ---- Ilustrações SVG dos veículos (placeholders vetoriais) ----
@@ -56,6 +66,32 @@ const SILHUETAS = {
     '<rect x="46" y="86" width="40" height="26" rx="4" fill="rgba(0,0,0,.3)"/>' +
     '<circle cx="90" cy="140" r="17"/><circle cx="234" cy="140" r="17"/>' +
     '<circle cx="90" cy="140" r="8" fill="rgba(0,0,0,.35)"/><circle cx="234" cy="140" r="8" fill="rgba(0,0,0,.35)"/>',
+  onibus:
+    '<rect x="30" y="64" width="258" height="74" rx="12"/>' +
+    '<rect x="42" y="76" width="34" height="24" rx="4" fill="rgba(0,0,0,.3)"/>' +
+    '<rect x="84" y="76" width="34" height="24" rx="4" fill="rgba(0,0,0,.3)"/>' +
+    '<rect x="126" y="76" width="34" height="24" rx="4" fill="rgba(0,0,0,.3)"/>' +
+    '<rect x="168" y="76" width="34" height="24" rx="4" fill="rgba(0,0,0,.3)"/>' +
+    '<rect x="210" y="76" width="34" height="24" rx="4" fill="rgba(0,0,0,.3)"/>' +
+    '<rect x="254" y="76" width="26" height="52" rx="4" fill="rgba(0,0,0,.22)"/>' +
+    '<circle cx="86" cy="140" r="17"/><circle cx="232" cy="140" r="17"/>' +
+    '<circle cx="86" cy="140" r="8" fill="rgba(0,0,0,.35)"/><circle cx="232" cy="140" r="8" fill="rgba(0,0,0,.35)"/>',
+  carreta:
+    '<rect x="56" y="60" width="230" height="66" rx="5"/>' +
+    '<path d="M56 126 L34 126 L34 118 L56 112 Z" opacity=".85"/>' +
+    '<rect x="86" y="126" width="8" height="18" opacity=".85"/>' +
+    '<line x1="66" y1="72" x2="66" y2="114" stroke="rgba(0,0,0,.18)" stroke-width="4"/>' +
+    '<line x1="120" y1="72" x2="120" y2="114" stroke="rgba(0,0,0,.18)" stroke-width="4"/>' +
+    '<line x1="174" y1="72" x2="174" y2="114" stroke="rgba(0,0,0,.18)" stroke-width="4"/>' +
+    '<line x1="228" y1="72" x2="228" y2="114" stroke="rgba(0,0,0,.18)" stroke-width="4"/>' +
+    '<circle cx="190" cy="140" r="16"/><circle cx="228" cy="140" r="16"/><circle cx="266" cy="140" r="16"/>' +
+    '<circle cx="190" cy="140" r="7" fill="rgba(0,0,0,.35)"/><circle cx="228" cy="140" r="7" fill="rgba(0,0,0,.35)"/><circle cx="266" cy="140" r="7" fill="rgba(0,0,0,.35)"/>',
+  trator:
+    '<path d="M54 136 L54 106 Q54 100 60 100 L128 100 L128 62 Q128 56 134 56 L178 56 Q184 56 184 62 L184 100 L196 104 L196 136 Z"/>' +
+    '<rect x="138" y="66" width="34" height="24" rx="3" fill="rgba(0,0,0,.3)"/>' +
+    '<rect x="142" y="36" width="7" height="22" rx="2"/>' +
+    '<circle cx="222" cy="118" r="34"/><circle cx="222" cy="118" r="15" fill="rgba(0,0,0,.35)"/>' +
+    '<circle cx="88" cy="138" r="18"/><circle cx="88" cy="138" r="8" fill="rgba(0,0,0,.35)"/>',
 };
 
 function svgVeiculo(v, mostrarNome) {
@@ -106,9 +142,9 @@ function cardVeiculo(v) {
     '<p class="versao">' + v.versao + "</p>" +
     '<div class="card-specs">' +
     "<span>📅 " + v.ano + "</span>" +
-    "<span>🛣️ " + formatarKm(v.km) + "</span>" +
-    "<span>⛽ " + v.combustivel + "</span>" +
-    "<span>⚙️ " + v.cambio + "</span>" +
+    (rodagem(v) ? "<span>" + rodagem(v) + "</span>" : "") +
+    (v.combustivel !== "—" ? "<span>⛽ " + v.combustivel + "</span>" : "") +
+    (v.cambio !== "—" ? "<span>⚙️ " + v.cambio + "</span>" : "") +
     "</div>" +
     '<div class="card-preco">' +
     '<span class="valor">' + formatarPreco(v.preco) + "</span>" +
@@ -257,7 +293,7 @@ function iniciarDestaques() {
   const grade = document.getElementById("grade-destaques");
   if (!grade) return;
   grade.innerHTML = VEICULOS.filter(function (v) { return v.destaque; })
-    .slice(0, 4)
+    .slice(0, 8)
     .map(cardVeiculo)
     .join("");
 }

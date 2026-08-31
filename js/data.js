@@ -1,7 +1,8 @@
 // Estoque de veículos — edite este arquivo para adicionar, alterar ou remover anúncios.
-// Campos: id, tipo (carro|moto|caminhao|utilitario), marca, modelo, versao, ano, km,
-// preco (R$), combustivel, cambio, cor, portas (opcional), destaque (true = aparece na home),
-// descricao, opcionais (lista), cores do card (g1/g2) e icone.
+// Campos: id, tipo (carro|moto|caminhao|utilitario|onibus|carreta|trator), marca, modelo,
+// versao, ano, km (ou horas, para tratores/máquinas), preco (R$), combustivel, cambio, cor,
+// portas (opcional), destaque (true = aparece na home), descricao, opcionais (lista),
+// cores do card (g1/g2) e icone (carro|sedan|suv|picape|moto|caminhao|van|onibus|carreta|trator).
 
 const VEICULOS = [
   {
@@ -377,17 +378,98 @@ const VEICULOS = [
     g2: "#0a2a66",
     icone: "picape",
   },
+  {
+    id: 15,
+    tipo: "onibus",
+    marca: "Volare",
+    modelo: "W9 Fly",
+    versao: "Executivo 28 lugares",
+    ano: 2019,
+    km: 198000,
+    preco: 329900,
+    combustivel: "Diesel",
+    cambio: "Manual",
+    cor: "Branco",
+    destaque: true,
+    descricao:
+      "Micro-ônibus Volare W9 Fly Executivo com 28 lugares, ar-condicionado e poltronas reclináveis. Ideal para fretamento, turismo e transporte de funcionários. Revisado e com documentação em dia.",
+    opcionais: [
+      "Ar-condicionado",
+      "28 poltronas executivas reclináveis",
+      "Bagageiro externo",
+      "Porta-pacotes interno",
+      "Tacógrafo digital",
+      "Câmera de ré",
+    ],
+    g1: "#316dca",
+    g2: "#12315f",
+    icone: "onibus",
+  },
+  {
+    id: 16,
+    tipo: "carreta",
+    marca: "Randon",
+    modelo: "SR Graneleira",
+    versao: "3 eixos",
+    ano: 2020,
+    km: null,
+    preco: 149900,
+    combustivel: "—",
+    cambio: "—",
+    cor: "Cinza",
+    destaque: false,
+    descricao:
+      "Semirreboque Randon graneleiro 3 eixos, assoalho e grades revisados, pneus em bom estado. Pronto para engatar e trabalhar no transporte de grãos e cargas secas.",
+    opcionais: [
+      "3 eixos com suspensão mecânica",
+      "Grades graneleiras completas",
+      "Lonas de cobertura",
+      "Pneus em bom estado",
+      "Documentação em dia",
+    ],
+    g1: "#57606a",
+    g2: "#22272e",
+    icone: "carreta",
+  },
+  {
+    id: 17,
+    tipo: "trator",
+    marca: "John Deere",
+    modelo: "6110J",
+    versao: "4x4 Cabinado",
+    ano: 2021,
+    km: null,
+    horas: 1850,
+    preco: 385000,
+    combustivel: "Diesel",
+    cambio: "PowrQuad 16x16",
+    cor: "Verde",
+    destaque: true,
+    descricao:
+      "Trator John Deere 6110J 4x4 cabinado com apenas 1.850 horas de uso. Máquina de único dono, revisada em concessionária, pneus com ótimo estado. Pronto para o trabalho no campo.",
+    opcionais: [
+      "Cabine com ar-condicionado",
+      "Tração 4x4",
+      "Transmissão PowrQuad 16x16",
+      "Levante hidráulico de 3 pontos",
+      "Contrapesos dianteiros",
+      "Piloto hidráulico",
+    ],
+    g1: "#2f7d32",
+    g2: "#123f14",
+    icone: "trator",
+  },
 ];
 
 // Configurações gerais da loja — personalize aqui.
 const LOJA = {
-  nome: "DM Veículos",
-  slogan: "Seu próximo veículo está aqui",
+  nome: "DM81 Consultoria & Finanças",
+  slogan: "Comprar ou vender? Está no lugar certo!",
   cidade: "São Paulo - SP",
   endereco: "Av. dos Veículos, 1000 - Centro",
   telefone: "(11) 99999-9999",
   // Somente números, com DDI 55 — usado nos links de WhatsApp.
   whatsapp: "5511999999999",
-  email: "contato@dmveiculos.com.br",
+  email: "contato@dm81.com.br",
   horario: "Seg a Sex: 8h às 18h | Sáb: 8h às 13h",
 };

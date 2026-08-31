@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Venda seu veículo | DM81 Consultoria &amp; Finanças</title>
-  <meta name="description" content="Venda ou troque seu carro, moto, caminhão, ônibus, carreta ou trator. Avaliação rápida e pagamento à vista.">
+  <title>Consórcios e Cartas Contempladas | DM81 Consultoria &amp; Finanças</title>
+  <meta name="description" content="Consórcios e cartas contempladas para aquisição rápida e segura do seu veículo. Parceria DM81 e Perim Consórcios: planejando seu futuro, realizando seus sonhos.">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🚗%3C/text%3E%3C/svg%3E">
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -33,8 +33,8 @@
       <nav class="menu">
         <a href="index.html">Início</a>
         <a href="index.html#estoque">Estoque</a>
-        <a href="consorcio.html">Consórcio</a>
-        <a href="vender.html" class="ativo">Venda seu veículo</a>
+        <a href="consorcio.html" class="ativo">Consórcio</a>
+        <a href="vender.html">Venda seu veículo</a>
         <a href="contato.html">Contato</a>
         <a href="vender.html" class="btn-vender">Anunciar agora</a>
       </nav>
@@ -44,106 +44,90 @@
   <!-- ===== Hero compacto ===== -->
   <section class="hero" style="padding: 3rem 0;">
     <div class="container">
-      <h1>Venda ou troque <em>seu veículo</em></h1>
-      <p>Preencha os dados abaixo e receba nossa avaliação pelo WhatsApp. Rápido, sem burocracia e com pagamento à vista.</p>
+      <h1>Consórcios e <em>cartas contempladas</em></h1>
+      <p>Para aquisição rápida e segura do seu bem — junto com a Perim Consórcios, planejando seu futuro e realizando seus sonhos.</p>
     </div>
   </section>
 
   <main class="secao">
     <div class="container">
-      <form class="form-card" id="form-vender">
-        <div class="form-grid">
-          <div class="campo">
-            <label for="v-nome">Seu nome *</label>
-            <input type="text" id="v-nome" name="nome" required placeholder="Nome completo">
+      <div class="consorcio-grid">
+
+        <div class="consorcio-texto">
+          <div class="bloco">
+            <span class="selo-parceria">🤝 Parceria oficial Perim Consórcios</span>
+            <h2>O que é o consórcio?</h2>
+            <p>O consórcio é uma forma planejada e econômica de conquistar seu veículo: você paga parcelas mensais que cabem no bolso, <strong>sem os juros do financiamento</strong>, e concorre todo mês à contemplação por sorteio ou lance.</p>
+            <p>É ideal para quem quer trocar de carro, comprar a primeira moto, renovar a frota de caminhões ou investir em um trator ou implemento — tudo com segurança e sem comprometer o orçamento.</p>
           </div>
-          <div class="campo">
-            <label for="v-telefone">Telefone / WhatsApp *</label>
-            <input type="tel" id="v-telefone" name="telefone" required placeholder="(11) 99999-9999">
+
+          <div class="bloco">
+            <h2>E a carta contemplada?</h2>
+            <p>A carta contemplada é o caminho mais rápido: uma cota de consórcio que <strong>já foi sorteada ou contemplada por lance</strong>. Com ela, você tem o crédito liberado para comprar seu veículo à vista, na hora, e segue pagando as parcelas restantes sem juros.</p>
+            <p>É a opção perfeita para quem tem pressa mas não quer pagar as taxas altas de um financiamento tradicional.</p>
           </div>
-          <div class="campo">
-            <label for="v-tipo">Tipo de veículo *</label>
-            <select id="v-tipo" name="tipo" required>
-              <option value="">Selecione...</option>
-              <option>Carro</option>
-              <option>Moto</option>
-              <option>Caminhão</option>
-              <option>Utilitário</option>
-              <option>Ônibus</option>
-              <option>Carreta</option>
-              <option>Trator</option>
-              <option>Outro</option>
-            </select>
-          </div>
-          <div class="campo">
-            <label for="v-modelo">Marca e modelo *</label>
-            <input type="text" id="v-modelo" name="modelo" required placeholder="Ex.: Fiat Strada Freedom">
-          </div>
-          <div class="campo">
-            <label for="v-ano">Ano *</label>
-            <input type="number" id="v-ano" name="ano" required min="1960" max="2027" placeholder="Ex.: 2021">
-          </div>
-          <div class="campo">
-            <label for="v-km">Quilometragem *</label>
-            <input type="number" id="v-km" name="km" required min="0" placeholder="Ex.: 45000">
-          </div>
-          <div class="campo">
-            <label for="v-valor">Valor pretendido (R$)</label>
-            <input type="number" id="v-valor" name="valor" min="0" placeholder="Opcional">
-          </div>
-          <div class="campo">
-            <label for="v-interesse">Você quer... *</label>
-            <select id="v-interesse" name="interesse" required>
-              <option value="">Selecione...</option>
-              <option>Vender à vista</option>
-              <option>Trocar por outro veículo</option>
-              <option>Apenas avaliar</option>
-            </select>
-          </div>
-          <div class="campo campo-full">
-            <label for="v-obs">Observações</label>
-            <textarea id="v-obs" name="observacoes" placeholder="Conte mais sobre o veículo: estado de conservação, revisões, débitos, detalhes..."></textarea>
+
+          <div class="bloco">
+            <h2>Para que tipo de bem?</h2>
+            <ul class="lista-opcionais">
+              <li>Carros e pick-ups</li>
+              <li>Motos</li>
+              <li>Caminhões e carretas</li>
+              <li>Ônibus e vans</li>
+              <li>Tratores e máquinas agrícolas</li>
+              <li>E muito mais — consulte a gente!</li>
+            </ul>
           </div>
         </div>
 
-        <div class="form-acoes">
-          <button type="submit" class="btn-whats">💬 Enviar pelo WhatsApp</button>
+        <div>
+          <div class="promo-img">
+            <img src="img/promo-consorcio.jpg" alt="DM81 Consultoria &amp; Finanças — consórcios e cartas contempladas para motos, carros, pick-ups, caminhões, ônibus, carretas e tratores, em parceria com a Perim Consórcios">
+          </div>
         </div>
-        <p class="form-aviso">* Campos obrigatórios. Ao enviar, o WhatsApp abrirá com a mensagem pronta para você confirmar — seus dados não são armazenados pelo site.</p>
-      </form>
+
+      </div>
+
+      <!-- ===== Vantagens ===== -->
+      <section class="secao" style="padding-bottom: 0;">
+        <div class="secao-titulo">
+          <h2>Por que fazer com a DM81?</h2>
+        </div>
+        <div class="vantagens-grid">
+          <div class="vantagem">
+            <div class="icone">🚫</div>
+            <h3>Sem juros</h3>
+            <p>Diferente do financiamento, no consórcio você paga apenas taxa de administração — muito mais barato no total.</p>
+          </div>
+          <div class="vantagem">
+            <div class="icone">📊</div>
+            <h3>Consultoria completa</h3>
+            <p>Analisamos seu objetivo e indicamos o melhor plano: consórcio novo ou carta contemplada.</p>
+          </div>
+          <div class="vantagem">
+            <div class="icone">⚡</div>
+            <h3>Aquisição rápida</h3>
+            <p>Com a carta contemplada, o crédito sai na hora e você compra seu veículo à vista.</p>
+          </div>
+          <div class="vantagem">
+            <div class="icone">🤝</div>
+            <h3>Parceria Perim Consórcios</h3>
+            <p>Trabalhamos com uma administradora sólida e experiente, com total segurança na sua contratação.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== CTA ===== -->
+      <section class="secao" style="padding-bottom: 0;">
+        <div class="cta">
+          <h2>Quer simular seu consórcio?</h2>
+          <p>Fale com nossa equipe agora mesmo: contamos qual plano cabe no seu bolso e quanto você economiza em relação ao financiamento.</p>
+          <a class="btn-whats" data-whats="Olá! Quero saber mais sobre consórcios e cartas contempladas da DM81." target="_blank" rel="noopener">💬 Simular pelo WhatsApp</a>
+        </div>
+      </section>
+
     </div>
   </main>
-
-  <!-- ===== Como funciona ===== -->
-  <section class="secao vantagens">
-    <div class="container">
-      <div class="secao-titulo">
-        <h2>Como funciona</h2>
-      </div>
-      <div class="vantagens-grid">
-        <div class="vantagem">
-          <div class="icone">1️⃣</div>
-          <h3>Envie os dados</h3>
-          <p>Preencha o formulário acima com as informações do seu veículo.</p>
-        </div>
-        <div class="vantagem">
-          <div class="icone">2️⃣</div>
-          <h3>Receba a avaliação</h3>
-          <p>Nossa equipe responde pelo WhatsApp com uma proposta inicial.</p>
-        </div>
-        <div class="vantagem">
-          <div class="icone">3️⃣</div>
-          <h3>Vistoria rápida</h3>
-          <p>Traga o veículo até a loja para a vistoria e fechamento do valor.</p>
-        </div>
-        <div class="vantagem">
-          <div class="icone">4️⃣</div>
-          <h3>Dinheiro na mão</h3>
-          <p>Negócio fechado: pagamento à vista ou entrada na troca, na hora.</p>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- ===== Rodapé ===== -->
   <footer class="rodape">
@@ -201,6 +185,5 @@
 
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
-  <script src="js/vender.js"></script>
 </body>
 </html>

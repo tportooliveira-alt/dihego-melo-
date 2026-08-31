@@ -37,11 +37,12 @@ document.addEventListener("DOMContentLoaded", function () {
     ["Modelo", v.modelo],
     ["Versão", v.versao],
     ["Ano", v.ano],
-    ["Quilometragem", formatarKm(v.km)],
-    ["Combustível", v.combustivel],
-    ["Câmbio", v.cambio],
-    ["Cor", v.cor],
   ];
+  if (v.km != null) specs.push(["Quilometragem", formatarKm(v.km)]);
+  if (v.horas != null) specs.push(["Horas de uso", v.horas.toLocaleString("pt-BR") + " h"]);
+  if (v.combustivel !== "—") specs.push(["Combustível", v.combustivel]);
+  if (v.cambio !== "—") specs.push(["Câmbio", v.cambio]);
+  specs.push(["Cor", v.cor]);
   if (v.portas) specs.push(["Portas", v.portas]);
   document.getElementById("specs").innerHTML = specs
     .map(function (linha) {

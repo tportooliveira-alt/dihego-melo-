@@ -1,6 +1,6 @@
-# DM Veículos — Site de Vendas de Veículos
+# DM81 Consultoria & Finanças — Site de Vendas de Veículos
 
-Site completo para compra e venda de veículos em geral (carros, motos, caminhões e utilitários), feito em **HTML, CSS e JavaScript puros** — sem instalação, sem servidor, sem dependências. Funciona direto no GitHub Pages ou em qualquer hospedagem estática.
+Site completo da DM81 Consultoria & Finanças para compra e venda de veículos em geral (carros, motos, caminhões, utilitários, ônibus, carretas e tratores), com página de consórcios e cartas contempladas, feito em **HTML, CSS e JavaScript puros** — sem instalação, sem servidor, sem dependências. Funciona direto no GitHub Pages ou em qualquer hospedagem estática.
 
 ## Páginas
 
@@ -8,6 +8,7 @@ Site completo para compra e venda de veículos em geral (carros, motos, caminhõ
 | --- | --- | --- |
 | Início | `index.html` | Hero com busca, categorias, destaques, vantagens e estoque completo com filtros (tipo, marca, preço, ano, câmbio), busca por texto e ordenação. |
 | Detalhes | `veiculo.html?id=N` | Ficha completa do veículo: especificações, opcionais, descrição, **simulador de financiamento** (tabela Price), botão de interesse via WhatsApp e veículos semelhantes. |
+| Consórcios | `consorcio.html` | Consórcios e cartas contempladas em parceria com a Perim Consórcios: o que é, vantagens e simulação pelo WhatsApp. |
 | Venda seu veículo | `vender.html` | Formulário de avaliação que envia os dados direto para o WhatsApp da loja. |
 | Contato | `contato.html` | Canais de atendimento e formulário de mensagem via WhatsApp. |
 
@@ -21,10 +22,10 @@ No final do arquivo, edite o objeto `LOJA`:
 
 ```js
 const LOJA = {
-  nome: "DM Veículos",
+  nome: "DM81 Consultoria & Finanças",
   telefone: "(11) 99999-9999",
   whatsapp: "5511999999999", // somente números, com DDI 55 — usado nos botões de WhatsApp
-  email: "contato@dmveiculos.com.br",
+  email: "contato@dm81.com.br",
   // ...
 };
 ```
@@ -38,7 +39,7 @@ Cada anúncio é um objeto na lista `VEICULOS`. Para adicionar um veículo, copi
 ```js
 {
   id: 15,                    // único, usado na URL veiculo.html?id=15
-  tipo: "carro",             // carro | moto | caminhao | utilitario
+  tipo: "carro",             // carro | moto | caminhao | utilitario | onibus | carreta | trator
   marca: "Fiat",
   modelo: "Argo",
   versao: "1.0 Drive",
@@ -52,7 +53,7 @@ Cada anúncio é um objeto na lista `VEICULOS`. Para adicionar um veículo, copi
   descricao: "Texto do anúncio...",
   opcionais: ["Ar-condicionado", "Direção elétrica"],
   g1: "#1f6feb", g2: "#0d3b8f",  // cores do gradiente da arte do card
-  icone: "carro",            // carro | sedan | suv | picape | moto | caminhao | van
+  icone: "carro",            // carro | sedan | suv | picape | moto | caminhao | van | onibus | carreta | trator
 },
 ```
 
@@ -78,8 +79,10 @@ python3 -m http.server 8000
 ```
 ├── index.html        # página inicial + catálogo com filtros
 ├── veiculo.html      # detalhes do anúncio + simulador de financiamento
+├── consorcio.html    # consórcios e cartas contempladas
 ├── vender.html       # formulário "venda seu veículo"
 ├── contato.html      # contato
+├── img/              # imagens (arte promocional do consórcio)
 ├── css/style.css     # todos os estilos
 └── js/
     ├── data.js       # ESTOQUE + dados da loja (edite aqui!)
