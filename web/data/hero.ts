@@ -20,6 +20,13 @@ export type Midia = {
   alt: string;
 };
 
+const efeitos: Midia = {
+  rotulo: "Efeitos",
+  src: `${CDN}/hf_20260831_071311_8da1bdfb-d573-4919-99df-3117ac576fff.mp4`,
+  poster: `${CDN}/hf_20260831_053157_2f8b84f8-9f72-4e0f-96eb-02676c1c86e1.png`,
+  alt: "Fileira de veículos com uma varredura de luz dourada percorrendo a lataria e o piso refletindo",
+};
+
 const patio: Midia = {
   rotulo: "Pátio",
   src: `${CDN}/hf_20260831_065546_883bfe22-8afc-4556-9cf8-fd975a444f8b.mp4`,
@@ -71,6 +78,7 @@ const pesados: Midia = {
 
 /** Índice vertical do hero. A ordem aqui é a numeração 01, 02, 03… na tela. */
 export const midiasHero: Midia[] = [
+  efeitos,
   patio,
   enfileirados,
   showroom,
