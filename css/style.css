@@ -210,6 +210,34 @@ h1, h2, h3, h4 {
     linear-gradient(180deg, #0c1a2e 0%, var(--bg) 100%);
 }
 
+/* Fundo opcional do hero — vídeo (img/hero.mp4) ou foto (img/hero.jpg).
+   Sem esses arquivos nada é exibido e o degradê acima permanece. */
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(180deg, rgba(10, 21, 38, 0.66) 0%, rgba(10, 21, 38, 0.86) 62%, var(--bg) 100%);
+  pointer-events: none;
+}
+
+.hero > .container { position: relative; z-index: 2; }
+
+/* Respeita quem prefere menos animação: o vídeo não é exibido. */
+@media (prefers-reduced-motion: reduce) {
+  .hero-video { display: none; }
+}
+
 .hero::after {
   content: "";
   position: absolute;
