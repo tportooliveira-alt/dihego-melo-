@@ -38,8 +38,8 @@ Duas contagens que caminham juntas; vale sempre a mais quente das duas.
 
 | Ação | Pontos |
 | --- | --- |
-| Mensagem no chat | 5 |
-| Mensagem no WhatsApp | 8 |
+| Mensagem no chat | 3 |
+| Mensagem no WhatsApp | 3 |
 | Simulou financiamento | 15 |
 | Pediu avaliação da troca | 20 |
 | Agendou visita | 30 |
@@ -47,6 +47,23 @@ Duas contagens que caminham juntas; vale sempre a mais quente das duas.
 
 **Faixas:** 60+ = quente · 30 a 59 = morno · abaixo de 30 = frio.
 Quem já marcou visita ou recebeu proposta é sempre quente.
+
+### Por que mensagem vale tão pouco
+
+Conversa é engajamento, não intenção de compra. Mensagens de chat e WhatsApp
+somam no máximo **12 pontos no total** (`TETO_CONVERSA`), então quem só conversa
+muito nunca chega a "quente" sozinho — precisa dizer o que procura e quanto pode
+pagar, ou agir: simular, trazer o usado, marcar visita.
+
+Isso foi calibrado com dados reais de produção do sistema irmão, onde as
+mensagens valiam 5 e 8 pontos sem teto: **95 de 182 leads (52%) estavam
+marcados como quentes**. Quando metade da base é "quente", o aviso vira ruído
+e o dono para de olhar. Com o teto, "quente" volta a significar alguma coisa.
+
+O aviso ao dono é disparado dentro de `registrar_interacao()`, o único ponto
+onde a temperatura é recalculada — assim vale para todo caminho (chat, WhatsApp,
+simulação, avaliação de troca, visita), sem depender de alguém lembrar de
+chamar a notificação.
 
 O aviso ao dono sai **uma vez por lead** — garantido pela chave única do evento
 no banco, mesmo com o servidor rodando em vários workers. Se o envio falhar, a

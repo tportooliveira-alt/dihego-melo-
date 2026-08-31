@@ -9,7 +9,7 @@ from __future__ import annotations
 
 import hashlib
 
-from . import estoque, ia, lead as mod_lead, notificacoes, prompts
+from . import estoque, ia, lead as mod_lead, prompts
 from .db import banco
 
 
@@ -103,12 +103,17 @@ def atender(
     temperatura = qualificacao["temperatura"]
     score = qualificacao["score"]
 
+    # 4. Persistir a interação já recalcula a temperatura e, se esquentou,
+    #    avisa o dono — não há um segundo lugar onde isso possa ser esquecido.
+    aviso = {"avisado": False}
     if lead_id:
-        score, temperatura = mod_lead.registrar_interacao(
+        score, temperatura, aviso = mod_lead.registrar_interacao(
             lead_id,
             "whatsapp" if canal == "whatsapp" else "chat",
             descricao=mensagem[:200],
             score_conversa=qualificacao["score"],
+            conversa_id=conversa_id,
+            canal=canal,
         )
         with banco() as conn:
             conn.execute(
@@ -116,11 +121,6 @@ def atender(
                 "ultima_temperatura = ?, atualizado_em = datetime('now') WHERE id = ?",
                 (lead_id, score, temperatura, conversa_id),
             )
-
-    # 4. Lead quente vai para o dono na hora.
-    aviso = notificacoes.avisar_dono_se_quente(
-        lead_id, temperatura, conversa_id=conversa_id, canal=canal
-    )
 
     return {
         "resposta": saida["texto"],

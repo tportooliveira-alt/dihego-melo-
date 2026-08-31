@@ -63,14 +63,23 @@ PERGUNTAS = {
 }
 
 # Pontos por interação registrada (o que a pessoa FAZ).
+#
+# Mensagem não é sinal de compra. Quem só conversa muito soma pouco e esbarra
+# num teto; quem age — simula, traz o usado para avaliar, marca visita — é que
+# sobe de verdade. Sem esse teto, um cliente falante vira "quente" sem nunca ter
+# dito o que procura nem quanto pode pagar, e o aviso ao dono vira ruído.
 PONTOS_INTERACAO = {
-    "chat": 5,
-    "whatsapp": 8,
+    "chat": 3,
+    "whatsapp": 3,
     "simulacao_financiamento": 15,
     "avaliacao_troca": 20,
     "visita": 30,
     "proposta": 50,
 }
+
+# Tipos que são só conversa, e o máximo que eles podem somar juntos.
+TIPOS_CONVERSA = {"chat", "whatsapp"}
+TETO_CONVERSA = 12
 
 
 def _tem(texto: str, tokens: list[str]) -> bool:
@@ -145,10 +154,21 @@ def qualificar(mensagem: str, historico: list[dict] | None = None) -> dict:
 
 
 def _score_interacoes(conn, lead_id: int) -> int:
+    """Soma as interações, com teto separado para o que é só conversa."""
     linhas = conn.execute(
         "SELECT tipo FROM lead_interacoes WHERE lead_id = ?", (lead_id,)
     ).fetchall()
-    return min(100, sum(PONTOS_INTERACAO.get(l["tipo"], 0) for l in linhas))
+
+    conversa = 0
+    acao = 0
+    for l in linhas:
+        pontos = PONTOS_INTERACAO.get(l["tipo"], 0)
+        if l["tipo"] in TIPOS_CONVERSA:
+            conversa += pontos
+        else:
+            acao += pontos
+
+    return min(100, min(conversa, TETO_CONVERSA) + acao)
 
 
 def _recalcular(conn, lead_id: int, score_conversa: int = 0) -> tuple[int, str]:
@@ -220,16 +240,36 @@ def upsert(
 
 def registrar_interacao(
     lead_id: int, tipo: str, descricao: str = "", metadata: dict | None = None,
-    score_conversa: int = 0,
-) -> tuple[int, str]:
-    """Grava a interação e devolve (score, temperatura) já recalculados."""
+    score_conversa: int = 0, conversa_id: int | None = None, canal: str = "site",
+    avisar_dono: bool = True,
+) -> tuple[int, str, dict]:
+    """Grava a interação, recalcula a temperatura e avisa o dono se esquentou.
+
+    O aviso mora aqui, e não em quem chama, porque este é o único ponto onde a
+    temperatura muda. Assim vale para todo caminho — chat, WhatsApp, simulação,
+    avaliação de troca ou visita agendada — sem depender de alguém lembrar.
+
+    Devolve (score, temperatura, aviso).
+    """
     with banco() as conn:
         conn.execute(
             "INSERT INTO lead_interacoes (lead_id, tipo, descricao, metadata) "
             "VALUES (?,?,?,?)",
             (lead_id, tipo, descricao, json.dumps(metadata or {}, ensure_ascii=False)),
         )
-        return _recalcular(conn, lead_id, score_conversa)
+        score, temperatura = _recalcular(conn, lead_id, score_conversa)
+
+    aviso = {"avisado": False, "motivo": "nao_solicitado"}
+    if avisar_dono:
+        # Import tardio: notificacoes importa este módulo, então importar no
+        # topo criaria ciclo.
+        from . import notificacoes
+
+        aviso = notificacoes.avisar_dono_se_quente(
+            lead_id, temperatura, conversa_id=conversa_id, canal=canal
+        )
+
+    return score, temperatura, aviso
 
 
 def obter(lead_id: int) -> dict | None:

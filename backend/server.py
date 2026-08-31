@@ -112,8 +112,9 @@ async def webhook_whatsapp(
             interesse=dados["texto"][:200],
         )
         if lead_id:
+            # Mesmo sem responder, um lead que esquenta chega ao dono.
             mod_lead.registrar_interacao(
-                lead_id, "whatsapp", descricao=dados["texto"][:200]
+                lead_id, "whatsapp", descricao=dados["texto"][:200], canal="whatsapp"
             )
         return {"recebido": True, "auto_reply": False}
 

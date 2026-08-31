@@ -141,13 +141,11 @@ def test_contexto_vazio_sem_estoque():
 
 def test_dono_e_avisado_quando_o_lead_esquenta(whatsapp_dublê):
     lead_id = lead.upsert(telefone="11988887777", origem="site", interesse="picape 4x4")
-    _, temperatura = lead.registrar_interacao(
+    _, temperatura, aviso = lead.registrar_interacao(
         lead_id, "chat", score_conversa=100
     )
     assert temperatura == "quente"
-
-    r = notificacoes.avisar_dono_se_quente(lead_id, temperatura, canal="site")
-    assert r["avisado"] is True
+    assert aviso["avisado"] is True, "registrar a interação já avisa o dono"
     assert len(whatsapp_dublê) == 1
     assert whatsapp_dublê[0]["numero"] == config.WHATSAPP_DONO
     assert "LEAD QUENTE" in whatsapp_dublê[0]["texto"]
@@ -158,8 +156,8 @@ def test_dono_nao_recebe_o_mesmo_lead_duas_vezes(whatsapp_dublê):
     lead_id = lead.upsert(telefone="11988887777", origem="site")
     lead.registrar_interacao(lead_id, "chat", score_conversa=100)
 
-    notificacoes.avisar_dono_se_quente(lead_id, "quente")
-    notificacoes.avisar_dono_se_quente(lead_id, "quente")
+    # Mais mensagens da mesma pessoa não podem gerar aviso repetido.
+    lead.registrar_interacao(lead_id, "chat", score_conversa=100)
     notificacoes.avisar_dono_se_quente(lead_id, "quente")
 
     assert len(whatsapp_dublê) == 1, "o dono não pode ser avisado em duplicidade"
@@ -259,3 +257,42 @@ def test_webhook_extrai_texto_e_telefone():
     }
     d = whatsapp.extrair_do_webhook(payload)
     assert d == {"telefone": "5511999998888", "texto": "Tem Ranger?", "nome": "João"}
+
+
+# ── Conversa não pode virar "quente" sozinha ─────────────────────────
+# Calibrado com os dados reais do sistema irmão em produção, onde 95 de 182
+# leads (52%) estavam marcados como quentes — o aviso ao dono vira ruído e
+# ele para de confiar.
+
+def test_muita_mensagem_nao_esquenta_o_lead(whatsapp_dublê):
+    """Quem só conversa muito não pode disparar aviso para o dono."""
+    lead_id = lead.upsert(telefone="11955554444", origem="whatsapp")
+    for _ in range(20):
+        _, temperatura, _aviso = lead.registrar_interacao(lead_id, "whatsapp", "oi")
+
+    assert temperatura != "quente", "volume de mensagem não é sinal de compra"
+    assert lead.obter(lead_id)["score"] <= lead.TETO_CONVERSA
+    assert whatsapp_dublê == []
+
+
+def test_acoes_reais_esquentam_o_lead(whatsapp_dublê):
+    """Simular, trazer o usado e marcar visita é intenção de verdade."""
+    lead_id = lead.upsert(telefone="11955553333", origem="site")
+    lead.registrar_interacao(lead_id, "simulacao_financiamento")        # 15
+    lead.registrar_interacao(lead_id, "avaliacao_troca")                # 20
+    _, temperatura, aviso = lead.registrar_interacao(lead_id, "visita")  # 30
+
+    assert temperatura == "quente"
+    # O aviso sai mesmo sem ninguém ter conversado no chat.
+    assert aviso["avisado"] is True
+    assert len(whatsapp_dublê) == 1
+
+
+def test_conversa_mais_acao_somam(whatsapp_dublê):
+    """O teto limita a conversa, mas não impede a ação de contar por inteiro."""
+    lead_id = lead.upsert(telefone="11955552222", origem="site")
+    for _ in range(10):
+        lead.registrar_interacao(lead_id, "chat")                  # teto: 12
+    score, _t, _a = lead.registrar_interacao(lead_id, "proposta")  # +50
+
+    assert score == lead.TETO_CONVERSA + 50
