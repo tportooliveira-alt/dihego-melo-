@@ -1,12 +1,11 @@
 import { cabecalhoDuvidas, duvidas } from "@/data/faq";
-import { midiasHero } from "@/data/hero";
+import { midiaDuvidas } from "@/data/hero";
 import { Accordion } from "@/components/ui/Accordion";
 import { Hotspot } from "@/components/ui/Hotspot";
 import { Reveal } from "@/components/ui/Reveal";
+import { VideoAmbiente } from "@/components/ui/VideoAmbiente";
 
 export function Faq() {
-  const midia = midiasHero[3]; // estúdio
-
   return (
     <section id="duvidas" className="secao-y">
       <div className="container-dm grid gap-12 lg:grid-cols-2 lg:gap-20">
@@ -25,15 +24,8 @@ export function Faq() {
 
         <Reveal atraso={0.1} className="order-1 lg:order-2">
           <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-border-hair">
-            <video
-              src={midia.src}
-              poster={midia.poster}
-              aria-label={midia.alt}
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="none"
+            <VideoAmbiente
+              midia={midiaDuvidas}
               className="foto-tratada absolute inset-0 h-full w-full object-cover"
             />
             <Hotspot x="52%" y="55%" titulo="Vistoria cautelar antes da venda" />

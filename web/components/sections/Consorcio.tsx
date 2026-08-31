@@ -1,13 +1,14 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "motion/react";
+import { useScroll, useTransform } from "motion/react";
 import { useRef } from "react";
 
-import { midiasHero } from "@/data/hero";
+import { midiaConsorcio } from "@/data/hero";
 import { linkWhatsapp, site } from "@/data/site";
 import { Hotspot } from "@/components/ui/Hotspot";
 import { LearnMoreLink } from "@/components/ui/LearnMoreLink";
 import { Reveal } from "@/components/ui/Reveal";
+import { VideoAmbiente } from "@/components/ui/VideoAmbiente";
 
 const texto = {
   titulo: ["Consórcio e", "carta", "contemplada"],
@@ -27,8 +28,6 @@ export function Consorcio() {
     offset: ["start end", "end start"],
   });
   const y = useTransform(scrollYProgress, [0, 1], [0, -40]);
-
-  const midia = midiasHero[2]; // as chaves
 
   return (
     <section id="consorcio" className="secao-y">
@@ -69,16 +68,9 @@ export function Consorcio() {
             ref={alvo}
             className="relative aspect-[16/7] overflow-hidden rounded-2xl border border-border-hair"
           >
-            <motion.video
+            <VideoAmbiente
+              midia={midiaConsorcio}
               style={{ y }}
-              src={midia.src}
-              poster={midia.poster}
-              aria-label={midia.alt}
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="none"
               className="foto-tratada absolute inset-0 h-[112%] w-full object-cover"
             />
             <Hotspot x="50%" y="50%" titulo="Cota já contemplada, crédito imediato" />

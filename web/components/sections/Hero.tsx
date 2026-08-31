@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { useState } from "react";
 import { Play } from "lucide-react";
 
-import { hero, midiasHero } from "@/data/hero";
+import { hero, midiasHero, numeroDaMidia } from "@/data/hero";
 import { site, linkWhatsapp } from "@/data/site";
 import { Hotspot } from "@/components/ui/Hotspot";
 import { cn } from "@/lib/utils";
@@ -64,7 +64,7 @@ export function Hero() {
         <div className="relative min-h-[420px] overflow-hidden lg:min-h-0">
           <AnimatePresence mode="sync">
             <motion.video
-              key={midia.id}
+              key={midia.rotulo}
               src={midia.src}
               poster={midia.poster}
               aria-label={midia.alt}
@@ -98,7 +98,7 @@ export function Hero() {
           <div className="absolute right-6 top-1/2 z-10 flex -translate-y-1/2 flex-col gap-6 lg:right-8">
             {midiasHero.map((m, i) => (
               <button
-                key={m.id}
+                key={m.rotulo}
                 type="button"
                 onClick={() => setAtivo(i)}
                 aria-label={`Ver ${m.rotulo}`}
@@ -110,7 +110,7 @@ export function Hero() {
                     : "text-text-muted hover:text-text-secondary",
                 )}
               >
-                {m.id}
+                {numeroDaMidia(i)}
               </button>
             ))}
           </div>
