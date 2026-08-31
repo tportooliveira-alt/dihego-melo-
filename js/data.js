@@ -468,6 +468,8 @@ const LOJA = {
   cidade: "Vitória da Conquista - BA",
   endereco: "Av. dos Veículos, 1000 - Centro",
   telefone: "(77) 98846-8505",
+  // Segundo canal de WhatsApp, exibido na página de contato.
+  telefone2: "(77) 98813-8220",
   // Somente números, com DDI 55 — usado nos links de WhatsApp.
   whatsapp: "5577988468505",
   email: "pointermelo@gmail.com",

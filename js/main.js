@@ -127,6 +127,39 @@ function svgVeiculo(v, mostrarNome) {
   );
 }
 
+// ---- Fotos reais dos anúncios ----
+// Mapa id -> lista de caminhos, mantido pelo painel admin (admin.html) em
+// img/veiculos/fotos.json. Sem foto, o anúncio usa a arte SVG acima.
+
+let FOTOS = {};
+
+async function carregarFotosReais() {
+  try {
+    const r = await fetch("img/veiculos/fotos.json", { cache: "no-cache" });
+    if (r.ok) FOTOS = await r.json();
+  } catch (e) {
+    // Sem fotos.json (ou offline): as artes SVG assumem.
+  }
+}
+
+const FOTOS_PRONTAS = carregarFotosReais();
+
+function fotosDoVeiculo(v) {
+  const lista = FOTOS[String(v.id)] || FOTOS[v.id];
+  return Array.isArray(lista) ? lista : [];
+}
+
+// Mídia do anúncio: foto real quando existir, arte SVG quando não.
+function mediaVeiculo(v, mostrarNome) {
+  const fotos = fotosDoVeiculo(v);
+  if (fotos.length) {
+    return (
+      '<img src="' + fotos[0] + '" alt="' + v.marca + " " + v.modelo + '" loading="lazy">'
+    );
+  }
+  return svgVeiculo(v, mostrarNome);
+}
+
 // ---- Ícones de linha (SVG) usados nos chips e listas ----
 
 const ICONES = {
@@ -173,7 +206,7 @@ function cardVeiculo(v) {
   return (
     '<article class="card-veiculo">' +
     '<a class="card-foto" href="veiculo.html?id=' + v.id + '">' +
-    svgVeiculo(v, false) +
+    mediaVeiculo(v, false) +
     '<span class="card-badge">' + TIPO_LABEL[v.tipo] + "</span>" +
     (v.destaque ? '<span class="card-badge destaque">Destaque</span>' : "") +
     "</a>" +
@@ -383,7 +416,7 @@ const ESTOQUE_PRONTO = carregarEstoqueDoServidor();
 async function iniciarSite() {
   iniciarMenu();
   preencherDadosLoja();
-  await ESTOQUE_PRONTO;
+  await Promise.all([ESTOQUE_PRONTO, FOTOS_PRONTAS]);
   iniciarDestaques();
   iniciarCatalogo();
 }

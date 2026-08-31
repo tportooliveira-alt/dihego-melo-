@@ -520,6 +520,13 @@ h1, h2, h3, h4 {
 
 .card-foto svg { width: 100%; height: 100%; }
 
+.card-foto img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .card-badge {
   position: absolute;
   top: 0.85rem;
@@ -844,6 +851,38 @@ h1, h2, h3, h4 {
 }
 
 .detalhe-foto svg { width: 100%; height: 100%; }
+
+.detalhe-foto img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.miniaturas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 0.85rem;
+}
+
+.miniaturas img {
+  width: 84px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: var(--r-sm);
+  border: 1px solid var(--hair);
+  cursor: pointer;
+  opacity: 0.65;
+  transition: opacity 0.2s var(--ease), border-color 0.2s var(--ease);
+}
+
+.miniaturas img:hover { opacity: 1; }
+
+.miniaturas img.ativa {
+  opacity: 1;
+  border-color: var(--gold-line);
+}
 
 .detalhe-painel,
 .bloco {

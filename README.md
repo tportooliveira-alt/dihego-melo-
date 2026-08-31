@@ -136,3 +136,17 @@ Guarde as imagens em no máximo ~1600px de largura e salve como JPG de qualidade
 > **Foto de anúncio é diferente.** Use imagem gerada por IA no topo e nas artes de
 > divulgação, mas a foto de cada veículo anunciado precisa ser do veículo real.
 > Foto genérica num anúncio engana o comprador e cria problema para a loja.
+
+## Painel de fotos (admin.html)
+
+Página administrativa, sem link no menu, para colocar as **fotos reais** de cada
+anúncio sem mexer em código: `admin.html`. Quem usa cola um **código de acesso**
+uma única vez (fica salvo no aparelho) e pode adicionar fotos, trocar a capa e
+excluir. As fotos entram em `img/veiculos/` e a lista em
+`img/veiculos/fotos.json` — o GitHub Pages republica o site sozinho em ~2 min.
+Sem foto real, o anúncio segue com a arte SVG.
+
+O código de acesso é um *fine-grained personal access token* do GitHub criado
+pelo dono do repositório em **Settings → Developer settings → Fine-grained
+tokens**, restrito **somente a este repositório** com a permissão
+**Contents: Read and write**. Nunca use um token de escopo amplo aqui.
