@@ -1,10 +1,10 @@
 // ===== Página de detalhes do veículo =====
 
-document.addEventListener("DOMContentLoaded", async function () {
+async function montarFichaVeiculo() {
   // Espera o estoque do servidor (quando houver) antes de montar a ficha.
   await ESTOQUE_PRONTO;
 
-  const params = new URLSearchParams(location.search);
+  const params = paramsDaPagina();
   const id = Number(params.get("id"));
   const v = VEICULOS.find(function (item) { return item.id === id; });
 
@@ -105,4 +105,6 @@ document.addEventListener("DOMContentLoaded", async function () {
   } else {
     document.getElementById("secao-semelhantes").hidden = true;
   }
-});
+}
+
+document.addEventListener("DOMContentLoaded", montarFichaVeiculo);

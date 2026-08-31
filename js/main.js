@@ -193,6 +193,12 @@ function cardVeiculo(v) {
   );
 }
 
+// Parâmetros da URL (?tipo=moto, ?id=7). Isolado numa função porque a prévia
+// de página única troca esta implementação para navegar sem recarregar.
+function paramsDaPagina() {
+  return new URLSearchParams(location.search);
+}
+
 // ---- Menu mobile ----
 
 function iniciarMenu() {
@@ -248,7 +254,7 @@ function iniciarCatalogo() {
   });
 
   // Aplica parâmetros vindos da URL (busca do hero / categorias).
-  const params = new URLSearchParams(location.search);
+  const params = paramsDaPagina();
   if (params.get("tipo")) fTipo.value = params.get("tipo");
   if (params.get("busca")) fBusca.value = params.get("busca");
 
@@ -373,10 +379,13 @@ async function carregarEstoqueDoServidor() {
 // antes de desenhar qualquer coisa — inclusive a ficha do veículo, em veiculo.js.
 const ESTOQUE_PRONTO = carregarEstoqueDoServidor();
 
-document.addEventListener("DOMContentLoaded", async function () {
+// Nomeada para a prévia de página única poder rodar de novo ao trocar de página.
+async function iniciarSite() {
   iniciarMenu();
   preencherDadosLoja();
   await ESTOQUE_PRONTO;
   iniciarDestaques();
   iniciarCatalogo();
-});
+}
+
+document.addEventListener("DOMContentLoaded", iniciarSite);

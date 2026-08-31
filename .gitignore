@@ -12,3 +12,6 @@ backend/data/*.db-shm
 
 # Sistema
 .DS_Store
+
+# Prévia gerada por scripts/gerar-previa.js (não versionada)
+previa-dm81.html
