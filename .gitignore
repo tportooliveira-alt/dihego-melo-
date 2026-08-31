@@ -1,0 +1,14 @@
+# Ambiente e segredos
+.env
+backend/.env
+backend/.venv/
+__pycache__/
+*.pyc
+
+# Banco local
+backend/data/*.db
+backend/data/*.db-wal
+backend/data/*.db-shm
+
+# Sistema
+.DS_Store

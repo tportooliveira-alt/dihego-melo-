@@ -1,6 +1,11 @@
 # DM81 Consultoria & Finanças — Site de Vendas de Veículos
 
-Site completo da DM81 Consultoria & Finanças para compra e venda de veículos em geral (carros, motos, caminhões, utilitários, ônibus, carretas e tratores), com página de consórcios e cartas contempladas, feito em **HTML, CSS e JavaScript puros** — sem instalação, sem servidor, sem dependências. Funciona direto no GitHub Pages ou em qualquer hospedagem estática.
+Site da DM81 Consultoria & Finanças para compra e venda de veículos em geral (carros, motos, caminhões, utilitários, ônibus, carretas e tratores), com página de consórcios e cartas contempladas.
+
+São duas partes que funcionam juntas ou separadas:
+
+- **O site** — HTML, CSS e JavaScript puros, sem instalação nem dependências. Roda no GitHub Pages ou em qualquer hospedagem estática.
+- **O backend** (pasta `backend/`, opcional) — atendente virtual com IA que conversa com o visitante, qualifica o interesse e **avisa o dono no WhatsApp quando o lead esquenta**. Roda numa VPS. Sem ele, o site continua completo: o chat encaminha para o WhatsApp.
 
 ## Páginas
 
@@ -11,6 +16,8 @@ Site completo da DM81 Consultoria & Finanças para compra e venda de veículos e
 | Consórcios | `consorcio.html` | Consórcios e cartas contempladas em parceria com a Perim Consórcios: o que é, vantagens e simulação pelo WhatsApp. |
 | Venda seu veículo | `vender.html` | Formulário de avaliação que envia os dados direto para o WhatsApp da loja. |
 | Contato | `contato.html` | Canais de atendimento e formulário de mensagem via WhatsApp. |
+
+Em todas as páginas há um **chat de atendimento**: com o backend no ar ele responde com IA; sem backend, leva a pessoa para o WhatsApp.
 
 ## Como personalizar
 
@@ -59,6 +66,17 @@ Cada anúncio é um objeto na lista `VEICULOS`. Para adicionar um veículo, copi
 
 As imagens dos anúncios são artes vetoriais (SVG) geradas automaticamente com a silhueta do tipo do veículo — o site funciona sem precisar hospedar fotos. Quando quiser usar fotos reais, é só evoluir a função `svgVeiculo` em `js/main.js` para exibir um `<img>` quando o veículo tiver um campo `foto`.
 
+## Atendimento com IA (opcional)
+
+A pasta `backend/` traz uma API em Python/FastAPI que:
+
+- conversa com o visitante usando o Claude, citando **apenas** veículos que existem no estoque;
+- pontua o lead pelo que a pessoa diz (veículo, orçamento, troca, prazo, telefone) e pelo que ela faz (simular, agendar, etc.);
+- **manda o contato no WhatsApp do dono assim que o lead fica quente** — uma vez por lead;
+- recebe e responde mensagens no WhatsApp pela Evolution API, com travas contra banimento do número.
+
+O passo a passo de instalação na VPS está em [`backend/README.md`](backend/README.md).
+
 ## Como publicar no GitHub Pages
 
 1. No repositório, vá em **Settings → Pages**.
@@ -82,11 +100,17 @@ python3 -m http.server 8000
 ├── consorcio.html    # consórcios e cartas contempladas
 ├── vender.html       # formulário "venda seu veículo"
 ├── contato.html      # contato
-├── img/              # imagens (arte promocional do consórcio)
-├── css/style.css     # todos os estilos
-└── js/
-    ├── data.js       # ESTOQUE + dados da loja (edite aqui!)
-    ├── main.js       # cards, filtros, artes SVG, WhatsApp
-    ├── veiculo.js    # página de detalhes + simulador
-    └── vender.js     # formulário de venda
+├── img/              # imagens (arte do consórcio, hero)
+├── css/style.css     # design system + todos os estilos
+├── js/
+│   ├── data.js       # ESTOQUE + dados da loja (edite aqui!)
+│   ├── main.js       # cards, filtros, artes SVG, WhatsApp
+│   ├── veiculo.js    # página de detalhes + simulador
+│   ├── vender.js     # formulário de venda
+│   └── chat.js       # atendente virtual
+└── backend/          # API opcional (IA + leads + WhatsApp) — veja backend/README.md
+    ├── server.py
+    ├── app/          # atendimento, estoque, lead, WhatsApp, notificações
+    ├── deploy/       # systemd, nginx, deploy.sh
+    └── tests/
 ```

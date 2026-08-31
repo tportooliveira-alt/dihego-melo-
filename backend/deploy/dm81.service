@@ -1,0 +1,29 @@
+# Serviço da API da DM81.
+# Instale em /etc/systemd/system/dm81.service e rode:
+#   sudo systemctl daemon-reload && sudo systemctl enable --now dm81
+
+[Unit]
+Description=API DM81 Consultoria e Financas
+After=network.target
+
+[Service]
+Type=simple
+User=dm81
+Group=dm81
+WorkingDirectory=/var/www/dm81/backend
+EnvironmentFile=/var/www/dm81/backend/.env
+ExecStart=/var/www/dm81/backend/.venv/bin/uvicorn server:app \
+  --host 127.0.0.1 --port 8000 --workers 2 \
+  --proxy-headers --forwarded-allow-ips="127.0.0.1"
+Restart=always
+RestartSec=5
+
+# Endurecimento: o serviço só escreve onde precisa.
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=read-only
+ReadWritePaths=/var/www/dm81/backend/data
+
+[Install]
+WantedBy=multi-user.target

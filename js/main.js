@@ -339,9 +339,44 @@ function iniciarDestaques() {
     .join("");
 }
 
-document.addEventListener("DOMContentLoaded", function () {
+// Quando o site é servido pela VPS, o estoque vem do backend (sempre atualizado).
+// Sem backend — no GitHub Pages, por exemplo — usa o que está em js/data.js.
+async function carregarEstoqueDoServidor() {
+  try {
+    const controle = new AbortController();
+    const prazo = setTimeout(function () { controle.abort(); }, 4000);
+    const r = await fetch("/api/veiculos", { signal: controle.signal });
+    clearTimeout(prazo);
+    if (!r.ok) return false;
+
+    const dados = await r.json();
+    if (!Array.isArray(dados.veiculos) || !dados.veiculos.length) return false;
+
+    // As cores e o ícone da arte continuam vindo do data.js, casados por id.
+    const visual = {};
+    VEICULOS.forEach(function (v) {
+      visual[v.id] = { g1: v.g1, g2: v.g2, icone: v.icone };
+    });
+
+    VEICULOS.length = 0;
+    dados.veiculos.forEach(function (v) {
+      const arte = visual[v.id] || { g1: "#1d3350", g2: "#0a1526", icone: v.tipo };
+      VEICULOS.push(Object.assign({}, v, arte));
+    });
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+// Começa a buscar já, sem esperar o DOM. Todas as páginas aguardam esta promessa
+// antes de desenhar qualquer coisa — inclusive a ficha do veículo, em veiculo.js.
+const ESTOQUE_PRONTO = carregarEstoqueDoServidor();
+
+document.addEventListener("DOMContentLoaded", async function () {
   iniciarMenu();
   preencherDadosLoja();
+  await ESTOQUE_PRONTO;
   iniciarDestaques();
   iniciarCatalogo();
 });

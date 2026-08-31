@@ -1,6 +1,9 @@
 // ===== Página de detalhes do veículo =====
 
-document.addEventListener("DOMContentLoaded", function () {
+document.addEventListener("DOMContentLoaded", async function () {
+  // Espera o estoque do servidor (quando houver) antes de montar a ficha.
+  await ESTOQUE_PRONTO;
+
   const params = new URLSearchParams(location.search);
   const id = Number(params.get("id"));
   const v = VEICULOS.find(function (item) { return item.id === id; });
