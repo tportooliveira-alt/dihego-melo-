@@ -28,7 +28,7 @@ export function Consorcio() {
   });
   const y = useTransform(scrollYProgress, [0, 1], [0, -40]);
 
-  const midia = midiasHero[1]; // as chaves
+  const midia = midiasHero[2]; // as chaves
 
   return (
     <section id="consorcio" className="secao-y">

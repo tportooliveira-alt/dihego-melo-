@@ -15,3 +15,7 @@ backend/data/*.db-shm
 
 # Prévia gerada por scripts/gerar-previa.js (não versionada)
 previa-dm81.html
+
+# Build do Next (a app fica em web/)
+.next/
+node_modules/

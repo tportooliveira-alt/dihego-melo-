@@ -5,7 +5,7 @@ import { Hotspot } from "@/components/ui/Hotspot";
 import { Reveal } from "@/components/ui/Reveal";
 
 export function Faq() {
-  const midia = midiasHero[2];
+  const midia = midiasHero[3]; // estúdio
 
   return (
     <section id="duvidas" className="secao-y">

@@ -3,25 +3,19 @@
 import { useRef, useState } from "react";
 import { MapPin } from "lucide-react";
 
-import { midiasHero } from "@/data/hero";
+import { ambientes } from "@/data/hero";
 import { site, linkWhatsapp } from "@/data/site";
 import type { Veiculo } from "@/data/vehicles";
 import { partesDoPreco, formatarKm } from "@/lib/formatCurrency";
 import { ArteVeiculo } from "@/components/icons/ArteVeiculo";
-
-/** Vídeo ambiente por categoria — pátio/estúdio, nunca fingindo ser o veículo. */
-const AMBIENTE: Record<string, number> = {
-  carros: 2, // estúdio
-  motos: 0, // showroom
-  pesados: 3, // pátio
-};
 
 export function VehicleCard({ veiculo }: { veiculo: Veiculo }) {
   const video = useRef<HTMLVideoElement>(null);
   const [tocando, setTocando] = useState(false);
   const { moeda, numero } = partesDoPreco(veiculo.preco);
 
-  const ambiente = midiasHero[AMBIENTE[veiculo.categoria] ?? 0];
+  // Clima da categoria — nunca uma foto fingindo ser o veículo anunciado.
+  const ambiente = ambientes[veiculo.categoria] ?? ambientes.carros;
 
   const rodagem =
     veiculo.km != null
