@@ -5,7 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Detalhes do veículo | DM81 Consultoria &amp; Finanças</title>
   <meta name="description" content="Veja fotos, especificações, opcionais e simule o financiamento deste veículo.">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🚗%3C/text%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath d='M24 2 L43 9 V24 Q43 38 24 46 Q5 38 5 24 V9 Z' fill='%230a1526' stroke='%23c9943a' stroke-width='3'/%3E%3Ctext x='24' y='31' text-anchor='middle' font-family='sans-serif' font-size='16' font-weight='bold' fill='%23e8b55a'%3E81%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -14,15 +17,15 @@
   <header class="topo">
     <div class="container topo-inner">
       <a href="index.html" class="logo">
-        <svg class="logo-icone" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+        <svg class="logo-icone" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <defs>
             <linearGradient id="grad-escudo" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#1f6feb"/>
-              <stop offset="100%" stop-color="#0b2447"/>
+              <stop offset="0%" stop-color="#1d3350"/>
+              <stop offset="100%" stop-color="#0a1526"/>
             </linearGradient>
           </defs>
-          <path d="M24 2 L43 9 V24 Q43 38 24 46 Q5 38 5 24 V9 Z" fill="url(#grad-escudo)" stroke="#ff6b35" stroke-width="2.5"/>
-          <text x="24" y="30.5" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="15" font-weight="800" fill="#fff">81</text>
+          <path d="M24 2 L43 9 V24 Q43 38 24 46 Q5 38 5 24 V9 Z" fill="url(#grad-escudo)" stroke="#c9943a" stroke-width="2.5"/>
+          <text x="24" y="30.5" text-anchor="middle" font-family="Sora, sans-serif" font-size="15" font-weight="800" fill="#e8b55a">81</text>
         </svg>
         <span class="logo-texto">
           <span>DM<span class="logo-81">81</span></span>
@@ -57,9 +60,9 @@
 
             <div class="detalhe-acoes">
               <a class="btn-whats" id="btn-interesse" target="_blank" rel="noopener">
-                💬 Tenho interesse — WhatsApp
+                <svg width="20" height="20" viewBox="0 0 32 32" fill="currentColor" aria-hidden="true"><path d="M16 3C9.4 3 4 8.4 4 15c0 2.3.7 4.5 1.9 6.4L4 29l7.8-1.8c1.8 1 3.9 1.6 6.2 1.6 6.6 0 12-5.4 12-12S22.6 3 16 3zm6.1 16.9c-.3.8-1.6 1.5-2.2 1.6-.6.1-1.3.2-3.7-.8-3.1-1.3-5.1-4.4-5.3-4.6-.2-.2-1.3-1.7-1.3-3.2s.8-2.3 1.1-2.6c.3-.3.6-.4.8-.4h.6c.2 0 .5-.1.7.5.3.7.9 2.2 1 2.4.1.2.1.4 0 .6-.1.2-.2.4-.4.6l-.6.7c-.2.2-.4.4-.2.8.2.4 1 1.6 2.1 2.6 1.4 1.3 2.6 1.7 3 1.9.4.2.6.2.8-.1.2-.2.9-1.1 1.2-1.5.3-.4.5-.3.9-.2.4.1 2.2 1 2.6 1.2.4.2.6.3.7.5.1.2.1.9-.2 1.7z"></path></svg>Tenho interesse — WhatsApp
               </a>
-              <a class="btn-principal" href="contato.html">Falar com a loja</a>
+              <a class="btn-ghost" href="contato.html">Falar com a loja</a>
             </div>
 
             <table class="specs-tabela">
@@ -109,7 +112,7 @@
 
       <!-- Aviso de anúncio não encontrado -->
       <div class="aviso-pagina" id="nao-encontrado" hidden>
-        <h1>Veículo não encontrado 😕</h1>
+        <h1>Veículo não encontrado</h1>
         <p>Este anúncio pode ter sido vendido ou removido do nosso estoque.</p>
         <a href="index.html#estoque" class="btn-principal">Ver estoque completo</a>
       </div>

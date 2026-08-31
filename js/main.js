@@ -24,8 +24,8 @@ function formatarKm(km) {
 
 // Rodagem do veículo: km, horas de uso (tratores/máquinas) ou nada (carretas).
 function rodagem(v) {
-  if (v.km != null) return "🛣️ " + formatarKm(v.km);
-  if (v.horas != null) return "⏱️ " + v.horas.toLocaleString("pt-BR") + " horas";
+  if (v.km != null) return chip("km", formatarKm(v.km));
+  if (v.horas != null) return chip("horas", v.horas.toLocaleString("pt-BR") + " h");
   return "";
 }
 
@@ -50,17 +50,17 @@ const SILHUETAS = {
     '<path d="M196 96 L282 96 L286 116 L196 116 Z" opacity=".75"/>' +
     '<circle cx="88" cy="140" r="18"/><circle cx="238" cy="140" r="18"/>' +
     '<circle cx="88" cy="140" r="8" fill="rgba(0,0,0,.35)"/><circle cx="238" cy="140" r="8" fill="rgba(0,0,0,.35)"/>',
+  // Silhueta única e contínua: garfo, guidão, tanque, banco, rabeta e motor.
   moto:
-    '<circle cx="80" cy="132" r="26" fill="none" stroke="rgba(255,255,255,.92)" stroke-width="9"/>' +
-    '<circle cx="240" cy="132" r="26" fill="none" stroke="rgba(255,255,255,.92)" stroke-width="9"/>' +
-    '<path d="M80 132 L128 92 L196 92 L240 132 L196 132 L156 100 Z"/>' +
-    '<path d="M120 92 L104 68 L132 68 Z"/>' +
-    '<rect x="150" y="82" width="52" height="14" rx="7"/>',
+    '<circle cx="84" cy="130" r="26" fill="none" stroke="#f5f0e8" stroke-width="8"/>' +
+    '<circle cx="236" cy="130" r="26" fill="none" stroke="#f5f0e8" stroke-width="8"/>' +
+    '<path d="M84 130 L108 88 L104 77 L138 74 Q160 72 180 79 L208 85 L233 81 L236 128 ' +
+    'L200 118 L168 116 L148 123 Z"/>',
   caminhao:
-    '<path d="M30 138 L30 96 Q30 84 42 84 L86 84 L106 108 L106 138 Z"/>' +
-    '<rect x="112" y="62" width="176" height="76" rx="6" opacity=".85"/>' +
-    '<circle cx="66" cy="140" r="17"/><circle cx="160" cy="140" r="17"/><circle cx="246" cy="140" r="17"/>' +
-    '<circle cx="66" cy="140" r="8" fill="rgba(0,0,0,.35)"/><circle cx="160" cy="140" r="8" fill="rgba(0,0,0,.35)"/><circle cx="246" cy="140" r="8" fill="rgba(0,0,0,.35)"/>',
+    '<path d="M26 138 L26 92 Q26 82 38 82 L84 82 L106 110 L106 138 Z"/>' +
+    '<rect x="100" y="58" width="188" height="80" rx="5" opacity=".82"/>' +
+    '<circle cx="64" cy="140" r="17"/><circle cx="162" cy="140" r="17"/><circle cx="246" cy="140" r="17"/>' +
+    '<circle cx="64" cy="140" r="8" fill="rgba(0,0,0,.4)"/><circle cx="162" cy="140" r="8" fill="rgba(0,0,0,.4)"/><circle cx="246" cy="140" r="8" fill="rgba(0,0,0,.4)"/>',
   van:
     '<path d="M34 138 L34 100 Q34 78 60 76 L220 70 Q262 70 276 96 L284 118 L284 138 Z"/>' +
     '<rect x="46" y="86" width="40" height="26" rx="4" fill="rgba(0,0,0,.3)"/>' +
@@ -96,27 +96,67 @@ const SILHUETAS = {
 
 function svgVeiculo(v, mostrarNome) {
   const gid = "g" + v.id + (mostrarNome ? "d" : "c");
+  const glow = "gl" + v.id + (mostrarNome ? "d" : "c");
   const silhueta = SILHUETAS[v.icone] || SILHUETAS.carro;
   const nome = mostrarNome
-    ? '<text x="160" y="34" text-anchor="middle" fill="rgba(255,255,255,.85)" ' +
-      'font-family="Segoe UI, sans-serif" font-size="17" font-weight="700">' +
-      v.marca + " " + v.modelo + "</text>"
+    ? '<text x="160" y="32" text-anchor="middle" fill="rgba(245,240,232,.55)" ' +
+      'font-family="Sora, system-ui, sans-serif" font-size="12" font-weight="700" ' +
+      'letter-spacing="2.4">' +
+      (v.marca + " " + v.modelo).toUpperCase() + "</text>"
     : "";
   return (
     '<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg" role="img" ' +
     'aria-label="' + v.marca + " " + v.modelo + '" preserveAspectRatio="xMidYMid slice">' +
-    "<defs><linearGradient id=\"" + gid + '" x1="0" y1="0" x2="1" y2="1">' +
-    '<stop offset="0%" stop-color="' + v.g1 + '"/>' +
-    '<stop offset="100%" stop-color="' + v.g2 + '"/>' +
-    "</linearGradient></defs>" +
+    "<defs>" +
+    '<linearGradient id="' + gid + '" x1="0" y1="0" x2="0.6" y2="1">' +
+    '<stop offset="0%" stop-color="#16283f"/>' +
+    '<stop offset="100%" stop-color="#0a1526"/>' +
+    "</linearGradient>" +
+    '<radialGradient id="' + glow + '" cx="0.78" cy="0.12" r="0.75">' +
+    '<stop offset="0%" stop-color="' + v.g1 + '" stop-opacity="0.55"/>' +
+    '<stop offset="100%" stop-color="' + v.g1 + '" stop-opacity="0"/>' +
+    "</radialGradient>" +
+    "</defs>" +
     '<rect width="320" height="200" fill="url(#' + gid + ')"/>' +
-    '<circle cx="270" cy="30" r="70" fill="rgba(255,255,255,.06)"/>' +
-    '<circle cx="30" cy="185" r="55" fill="rgba(0,0,0,.10)"/>' +
-    '<rect y="156" width="320" height="44" fill="rgba(0,0,0,.18)"/>' +
-    '<g fill="rgba(255,255,255,.92)">' + silhueta + "</g>" +
+    '<rect width="320" height="200" fill="url(#' + glow + ')"/>' +
+    '<ellipse cx="160" cy="152" rx="128" ry="16" fill="rgba(0,0,0,.35)"/>' +
+    '<g fill="#f5f0e8" opacity="0.96">' + silhueta + "</g>" +
+    '<rect x="28" y="157" width="264" height="2" rx="1" fill="rgba(201,148,58,.55)"/>' +
     nome +
     "</svg>"
   );
+}
+
+// ---- Ícones de linha (SVG) usados nos chips e listas ----
+
+const ICONES = {
+  ano:
+    '<rect x="3" y="5" width="18" height="16" rx="2"/><line x1="3" y1="10" x2="21" y2="10"/>' +
+    '<line x1="8" y1="3" x2="8" y2="7"/><line x1="16" y1="3" x2="16" y2="7"/>',
+  km:
+    '<path d="M4 18a8 8 0 1 1 16 0"/><line x1="12" y1="18" x2="16" y2="12"/>',
+  horas:
+    '<circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/>',
+  combustivel:
+    '<path d="M5 21V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v16"/><line x1="3" y1="21" x2="15" y2="21"/>' +
+    '<path d="M13 9h3a2 2 0 0 1 2 2v6a1.5 1.5 0 0 0 3 0V9l-2.5-3"/>',
+  cambio:
+    '<line x1="6" y1="4" x2="6" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/>' +
+    '<line x1="18" y1="4" x2="18" y2="12"/><line x1="6" y1="12" x2="18" y2="12"/>' +
+    '<circle cx="6" cy="20" r="1.6"/>',
+};
+
+function ico(nome, tamanho) {
+  const t = tamanho || 13;
+  return (
+    '<svg width="' + t + '" height="' + t + '" viewBox="0 0 24 24" fill="none" ' +
+    'stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" ' +
+    'aria-hidden="true">' + ICONES[nome] + "</svg>"
+  );
+}
+
+function chip(icone, texto) {
+  return "<span>" + ico(icone) + texto + "</span>";
 }
 
 // ---- Links de WhatsApp ----
@@ -141,10 +181,10 @@ function cardVeiculo(v) {
     "<h3>" + v.marca + " " + v.modelo + "</h3>" +
     '<p class="versao">' + v.versao + "</p>" +
     '<div class="card-specs">' +
-    "<span>📅 " + v.ano + "</span>" +
-    (rodagem(v) ? "<span>" + rodagem(v) + "</span>" : "") +
-    (v.combustivel !== "—" ? "<span>⛽ " + v.combustivel + "</span>" : "") +
-    (v.cambio !== "—" ? "<span>⚙️ " + v.cambio + "</span>" : "") +
+    chip("ano", v.ano) +
+    rodagem(v) +
+    (v.combustivel !== "—" ? chip("combustivel", v.combustivel) : "") +
+    (v.cambio !== "—" ? chip("cambio", v.cambio) : "") +
     "</div>" +
     '<div class="card-preco">' +
     '<span class="valor">' + formatarPreco(v.preco) + "</span>" +
@@ -258,8 +298,9 @@ function iniciarCatalogo() {
       : '<p class="sem-resultados">Nenhum veículo encontrado com esses filtros. ' +
         "Tente ajustar a busca ou fale com a gente no WhatsApp — buscamos o veículo pra você!</p>";
 
-    info.textContent =
-      lista.length + (lista.length === 1 ? " veículo encontrado" : " veículos encontrados");
+    info.innerHTML =
+      "<strong>" + lista.length + "</strong>" +
+      (lista.length === 1 ? " veículo encontrado" : " veículos encontrados");
   }
 
   [fTipo, fMarca, fPreco, fAno, fCambio, fOrdem].forEach(function (el) {

@@ -5,7 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DM81 Consultoria &amp; Finanças | Compra e Venda de Veículos</title>
   <meta name="description" content="DM81 Consultoria & Finanças: compra e venda de carros, motos, pick-ups, caminhões, ônibus, carretas e tratores. Consórcios e cartas contempladas com a Perim Consórcios.">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🚗%3C/text%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Cpath d='M24 2 L43 9 V24 Q43 38 24 46 Q5 38 5 24 V9 Z' fill='%230a1526' stroke='%23c9943a' stroke-width='3'/%3E%3Ctext x='24' y='31' text-anchor='middle' font-family='sans-serif' font-size='16' font-weight='bold' fill='%23e8b55a'%3E81%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -14,15 +17,15 @@
   <header class="topo">
     <div class="container topo-inner">
       <a href="index.html" class="logo">
-        <svg class="logo-icone" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+        <svg class="logo-icone" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
           <defs>
             <linearGradient id="grad-escudo" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#1f6feb"/>
-              <stop offset="100%" stop-color="#0b2447"/>
+              <stop offset="0%" stop-color="#1d3350"/>
+              <stop offset="100%" stop-color="#0a1526"/>
             </linearGradient>
           </defs>
-          <path d="M24 2 L43 9 V24 Q43 38 24 46 Q5 38 5 24 V9 Z" fill="url(#grad-escudo)" stroke="#ff6b35" stroke-width="2.5"/>
-          <text x="24" y="30.5" text-anchor="middle" font-family="Segoe UI, sans-serif" font-size="15" font-weight="800" fill="#fff">81</text>
+          <path d="M24 2 L43 9 V24 Q43 38 24 46 Q5 38 5 24 V9 Z" fill="url(#grad-escudo)" stroke="#c9943a" stroke-width="2.5"/>
+          <text x="24" y="30.5" text-anchor="middle" font-family="Sora, sans-serif" font-size="15" font-weight="800" fill="#e8b55a">81</text>
         </svg>
         <span class="logo-texto">
           <span>DM<span class="logo-81">81</span></span>
@@ -44,23 +47,24 @@
   <!-- ===== Hero ===== -->
   <section class="hero">
     <div class="container">
+      <span class="eyebrow">Compra · Venda · Consórcios</span>
       <h1>Está à procura de um <em>veículo</em>?</h1>
       <p>Moto, carro, pick-up, caminhão, ônibus, carreta, trator e muito mais. Comprar ou vender — você está no lugar certo!</p>
 
       <form class="busca-hero" action="index.html">
         <input type="text" name="busca" placeholder="Busque por marca ou modelo... ex.: Onix, CB 500, Accelo">
-        <button type="submit">🔍 Buscar</button>
+        <button type="submit"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>Buscar</button>
       </form>
 
       <div class="categorias-hero">
-        <a href="index.html?tipo=carro">🚗 Carros</a>
-        <a href="index.html?tipo=moto">🏍️ Motos</a>
-        <a href="index.html?tipo=caminhao">🚚 Caminhões</a>
-        <a href="index.html?tipo=utilitario">🚐 Utilitários</a>
-        <a href="index.html?tipo=onibus">🚌 Ônibus</a>
-        <a href="index.html?tipo=carreta">🚛 Carretas</a>
-        <a href="index.html?tipo=trator">🚜 Tratores</a>
-        <a href="consorcio.html">💳 Consórcios</a>
+        <a href="index.html?tipo=carro">Carros</a>
+        <a href="index.html?tipo=moto">Motos</a>
+        <a href="index.html?tipo=caminhao">Caminhões</a>
+        <a href="index.html?tipo=utilitario">Utilitários</a>
+        <a href="index.html?tipo=onibus">Ônibus</a>
+        <a href="index.html?tipo=carreta">Carretas</a>
+        <a href="index.html?tipo=trator">Tratores</a>
+        <a href="consorcio.html" class="destaque-chip">Consórcios</a>
       </div>
     </div>
   </section>
@@ -84,22 +88,22 @@
       </div>
       <div class="vantagens-grid">
         <div class="vantagem">
-          <div class="icone">✅</div>
+          <div class="icone"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 L20 6 v6c0 4.5-3.2 7.8-8 9-4.8-1.2-8-4.5-8-9V6z"/><polyline points="9 12 11.5 14.5 15.5 10"/></svg></div>
           <h3>Procedência garantida</h3>
           <p>Todos os veículos passam por vistoria cautelar e checagem completa de documentação.</p>
         </div>
         <div class="vantagem">
-          <div class="icone">💰</div>
+          <div class="icone"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="6" width="20" height="13" rx="2"/><line x1="2" y1="10.5" x2="22" y2="10.5"/><line x1="6" y1="15" x2="10" y2="15"/></svg></div>
           <h3>Financiamento facilitado</h3>
           <p>Trabalhamos com os principais bancos e aprovamos seu crédito rapidinho, com ou sem entrada.</p>
         </div>
         <div class="vantagem">
-          <div class="icone">🔄</div>
+          <div class="icone"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="17 2 21 6 17 10"/><path d="M3 12V10a4 4 0 0 1 4-4h14"/><polyline points="7 22 3 18 7 14"/><path d="M21 12v2a4 4 0 0 1-4 4H3"/></svg></div>
           <h3>Aceitamos troca</h3>
           <p>Seu usado vale mais aqui: avaliamos na hora e usamos como parte do pagamento.</p>
         </div>
         <div class="vantagem">
-          <div class="icone">🛡️</div>
+          <div class="icone"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 L20 6 v6c0 4.5-3.2 7.8-8 9-4.8-1.2-8-4.5-8-9V6z"/></svg></div>
           <h3>Garantia de motor e câmbio</h3>
           <p>Compre com tranquilidade: garantia de 90 dias para motor e câmbio em todo o estoque.</p>
         </div>
@@ -112,7 +116,8 @@
     <div class="container">
       <div class="cta-consorcio">
         <div>
-          <h2>Novidade: consórcios e cartas contempladas 💳</h2>
+          <span class="eyebrow">Novidade</span>
+          <h2>Consórcios e cartas contempladas</h2>
           <p>Junto com a <strong>Perim Consórcios</strong>, planejamos seu futuro para você conquistar seu veículo de forma rápida e segura — sem os juros do financiamento.</p>
         </div>
         <a href="consorcio.html" class="btn-branco">Quero saber mais</a>
