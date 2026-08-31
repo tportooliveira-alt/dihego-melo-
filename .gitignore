@@ -13,8 +13,9 @@ backend/data/*.db-shm
 # Sistema
 .DS_Store
 
-# Prévia gerada por scripts/gerar-previa.js (não versionada)
+# Prévias geradas por script (não versionadas)
 previa-dm81.html
+previa-dm81-next.html
 
 # Build do Next (a app fica em web/)
 .next/
