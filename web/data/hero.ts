@@ -3,6 +3,14 @@
  * `public/video/` — o site não depende de CDN de terceiros. O `poster` é o
  * quadro que aparece enquanto o vídeo carrega (JPG 1600px, qualidade 80).
  *
+ * Os arquivos são H.264 8 bits. O Higgsfield entrega HEVC 10 bits, que só toca
+ * no Safari e em Chrome com apoio do hardware — no Firefox e em boa parte dos
+ * Windows o vídeo simplesmente não aparece, fica só o poster. Ao acrescentar um
+ * vídeo novo, converta antes:
+ *
+ *   ffmpeg -i entrada.mp4 -c:v libx264 -profile:v high -pix_fmt yuv420p \
+ *     -crf 24 -preset slow -an -movflags +faststart public/video/saida.mp4
+ *
  * Cada mídia tem nome próprio e as seções pedem pelo nome. Um vídeo novo no
  * hero não pode reatribuir silenciosamente a imagem do consórcio.
  */
@@ -14,12 +22,22 @@ export type Midia = {
   alt: string;
 };
 
-const efeitos: Midia = {
-  rotulo: "Efeitos",
-  src: `${CDN}/hf_20260831_071311_8da1bdfb-d573-4919-99df-3117ac576fff.mp4`,
-  poster: `${CDN}/hf_20260831_053157_2f8b84f8-9f72-4e0f-96eb-02676c1c86e1.png`,
-  alt: "Fileira de veículos com uma varredura de luz dourada percorrendo a lataria e o piso refletindo",
-};
+/**
+ * FALTA ENTRAR: o vídeo de varredura de luz gerado no Higgsfield.
+ *
+ * Baixe-o e salve como `public/video/efeitos.mp4`, converta para H.264 como os
+ * outros (veja o cabeçalho acima), e então descomente o bloco e a entrada em
+ * `midiasHero`. Ele não pôde ser internalizado junto com os demais porque o
+ * ambiente onde foi gerado não alcança o CDN de saída.
+ *
+ * const efeitos: Midia = {
+ *   rotulo: "Efeitos",
+ *   src: "/video/efeitos.mp4",
+ *   poster: "/video/enfileirados.jpg",
+ *   alt: "Fileira de veículos com uma varredura de luz dourada percorrendo a lataria e o piso refletindo",
+ * };
+ */
+
 
 const patio: Midia = {
   rotulo: "Pátio",
@@ -72,7 +90,6 @@ const pesados: Midia = {
 
 /** Índice vertical do hero. A ordem aqui é a numeração 01, 02, 03… na tela. */
 export const midiasHero: Midia[] = [
-  efeitos,
   patio,
   enfileirados,
   showroom,
