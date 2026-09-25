@@ -1,8 +1,8 @@
 // ===== Página de detalhes do veículo =====
 
 async function montarFichaVeiculo() {
-  // Espera o estoque do servidor (quando houver) antes de montar a ficha.
-  await ESTOQUE_PRONTO;
+  // Espera o estoque do servidor (quando houver) e as fotos reais.
+  await Promise.all([ESTOQUE_PRONTO, FOTOS_PRONTAS]);
 
   const params = paramsDaPagina();
   const id = Number(params.get("id"));
@@ -19,8 +19,35 @@ async function montarFichaVeiculo() {
 
   document.title = v.marca + " " + v.modelo + " " + v.ano + " | " + LOJA.nome;
 
-  // Foto principal
-  document.getElementById("detalhe-foto").innerHTML = svgVeiculo(v, true);
+  // Foto principal — real quando existir, arte SVG quando não. Com 2+ fotos,
+  // uma fileira de miniaturas entra logo abaixo e troca a foto grande.
+  const alvoFoto = document.getElementById("detalhe-foto");
+  const fotos = fotosDoVeiculo(v);
+  alvoFoto.innerHTML = mediaVeiculo(v, true);
+
+  const miniaturasAntigas = document.getElementById("detalhe-miniaturas");
+  if (miniaturasAntigas) miniaturasAntigas.remove();
+
+  if (fotos.length > 1) {
+    const fila = document.createElement("div");
+    fila.className = "miniaturas";
+    fila.id = "detalhe-miniaturas";
+    fila.innerHTML = fotos
+      .map(function (src, i) {
+        return (
+          '<img src="' + src + '" alt="Foto ' + (i + 1) + " de " + v.marca + " " + v.modelo +
+          '" loading="lazy"' + (i === 0 ? ' class="ativa"' : "") + ">"
+        );
+      })
+      .join("");
+    fila.addEventListener("click", function (ev) {
+      if (ev.target.tagName !== "IMG") return;
+      alvoFoto.querySelector("img").src = ev.target.src;
+      fila.querySelectorAll("img").forEach(function (m) { m.classList.remove("ativa"); });
+      ev.target.classList.add("ativa");
+    });
+    alvoFoto.insertAdjacentElement("afterend", fila);
+  }
 
   // Painel de informações
   document.getElementById("tipo-tag").textContent = TIPO_LABEL[v.tipo];

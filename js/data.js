@@ -465,11 +465,13 @@ const VEICULOS = [
 const LOJA = {
   nome: "DM81 Consultoria & Finanças",
   slogan: "Comprar ou vender? Está no lugar certo!",
-  cidade: "São Paulo - SP",
+  cidade: "Vitória da Conquista - BA",
   endereco: "Av. dos Veículos, 1000 - Centro",
-  telefone: "(11) 99999-9999",
+  telefone: "(77) 98846-8505",
+  // Segundo canal de WhatsApp, exibido na página de contato.
+  telefone2: "(77) 98813-8220",
   // Somente números, com DDI 55 — usado nos links de WhatsApp.
-  whatsapp: "5511999999999",
-  email: "contato@dm81.com.br",
+  whatsapp: "5577988468505",
+  email: "pointermelo@gmail.com",
   horario: "Seg a Sex: 8h às 18h | Sáb: 8h às 13h",
 };
